@@ -12,6 +12,6 @@ getName(){
   return this.model.user; 
 }
 getItems(){
-  return this.model.items;
+  return this.model.items.filter(item=>!item.action);
 }
 }

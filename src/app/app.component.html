@@ -3,29 +3,36 @@
     <div class="col-5">
       <h3 class="bg-primary text-white p-3">{{ getName() }} To Do List</h3>
 
-      <div class="input-group">
-        <input type="text" class="form-control" />
+      <div class="input-group mb-3"> <!-- Ekstra boşluk için mb-3 sınıfı eklendi -->
+        <input type="text" class="form-control" placeholder="Enter description" />
         <div class="input-group-append">
           <button class="btn btn-primary">Add</button>
         </div>
       </div>
+      
       <div>
         <table class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th></th>
+              <th>#</th> <!-- Sıra numarası için bir sütun ekledik -->
               <th>Description</th>
               <th>Action</th>
+              <th>Completed</th> <!-- Yeni sütun: Durum gösterimi için -->
             </tr>
           </thead>
-
           <tbody>
             <tr *ngFor="let item of getItems(); let i = index">
-              <td>{{ i + 1 }}</td>
+              <td>{{ i + 1 }}</td> <!-- Sıra numarasını gösteren hücre -->
               <td>{{ item.description }}</td>
-              <td [ngSwitch]="item.action"></td>
-              <span *ngSwitchCase="true"> Yes </span>
-              <span *ngSwitchCase="false"> No </span>
+              <td>
+                <!-- Checkbox ile tamamlanma durumunu işaretlemek için Action sütunu -->
+                <input type="checkbox" [(ngModel)]="item.action" />
+              </td>
+              <td [ngSwitch]="item.action">
+                <!-- ngSwitch ve ngSwitchCase kullanılarak Completed sütununda durum gösterimi -->
+                <span *ngSwitchCase="true">Yes</span> <!-- item.action true ise Yes gösterilecek -->
+                <span *ngSwitchCase="false">No</span> <!-- item.action false ise No gösterilecek -->
+              </td>
             </tr>
           </tbody>
         </table>
