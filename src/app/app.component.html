@@ -4,10 +4,14 @@
       <h3 class="bg-primary text-white p-3">{{ getName() }} To Do List</h3>
 
       <div class="input-group mb-3"> <!-- Ekstra boşluk için mb-3 sınıfı eklendi -->
-        <input type="text" class="form-control" placeholder="Enter description" />
+        <input type="text" #todoText class="form-control" placeholder="Enter description" />
         <div class="input-group-append">
-          <button class="btn btn-primary">Add</button>
+          <button class="btn btn-primary" (click)="addItem(todoText.value); todoText.value='';">Add</button>
         </div>
+      </div>
+      <div class="custom-control custom-checkbox my-3">
+        <input type="checkbox" class="custom-control-input" name="" id="displayAll" [(ngModel)]="isDisplay"/>
+        <label class="custom-control-label" for="displayAll">Display All</label>
       </div>
       
       <div>
